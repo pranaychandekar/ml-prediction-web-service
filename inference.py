@@ -34,7 +34,7 @@ async def index(request):
 
     :return: The success message if the service is up.
     """
-    LOGGER.logger.info("Checking the service setup.")
+    LOGGER.logger.info("Checking the service setup.\n")
     return response.json(
         {
             "status": 200,
@@ -112,6 +112,6 @@ async def get_response(request):
 
 
 if __name__ == "__main__":
-    LOGGER.logger.info("Starting the ml-inference-api web service.")
+    LOGGER.logger.info("\nStarting the ml-inference-api web service.\n")
     app.run(host=CONFIGS.get_configuration("SOCKET_HOST"), port=CONFIGS.get_configuration("PORT"),
             workers=CONFIGS.get_configuration("THREAD_POOL"))
