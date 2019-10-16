@@ -42,13 +42,15 @@ async def index(request):
             "version": "1.0",
             "author": "Pranay Chandekar",
             "linkedIn": "https://www.linkedin.com/in/pranaychandekar/",
-            "message": "The web service is up and running!"
+            "message": "The web service is up and running!",
         }
     )
 
 
 @app.route("v1/infer", methods=["POST"])
-@doc.summary("Hit this end-point with a post request to infer the label for the text in the request.")
+@doc.summary(
+    "Hit this end-point with a post request to infer the label for the text in the request."
+)
 @doc.consumes(
     doc.JsonBody({"source": str, "text": str}),
     location="body",
@@ -102,9 +104,7 @@ async def get_response(request):
     toc = time.time()
 
     LOGGER.logger.info(
-        "Total time taken to respond: "
-        + str(round(1000 * (toc - tic), 2))
-        + " ms.\n"
+        "Total time taken to respond: " + str(round(1000 * (toc - tic), 2)) + " ms.\n"
     )
 
     # Step 04: Return the response.
@@ -113,5 +113,8 @@ async def get_response(request):
 
 if __name__ == "__main__":
     LOGGER.logger.info("\nStarting the ml-inference-api web service.\n")
-    app.run(host=CONFIGS.get_configuration("SOCKET_HOST"), port=CONFIGS.get_configuration("PORT"),
-            workers=CONFIGS.get_configuration("THREAD_POOL"))
+    app.run(
+        host=CONFIGS.get_configuration("SOCKET_HOST"),
+        port=CONFIGS.get_configuration("PORT"),
+        workers=CONFIGS.get_configuration("THREAD_POOL"),
+    )
