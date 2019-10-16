@@ -44,7 +44,9 @@ class Classifier:
         # Step 03: Assign this instance to '__instance'.
         Classifier.__instance = self
 
-        LOGGER.logger.info("Finished loading the classifier model: " + str(self.get_model()))
+        LOGGER.logger.info(
+            "Finished loading the classifier model: " + str(self.get_model())
+        )
 
     def get_model(self):
         """
