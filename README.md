@@ -5,7 +5,7 @@
 A simple python web service to host a machine learning model for prediction as a REST API.    
 
 <p align="center">        
-  <img src="/docs/images/mpws-00.png" alt="RESTful Web Service">        
+  <img src="/docs/images/mpws-00.jpg" alt="RESTful Web Service">        
 </p>  
 
 The container trains a simple [text classifier](https://fasttext.cc/docs/en/supervised-tutorial.html) and hosts it for prediction as a web service written in [Sanic Framework](https://sanic.readthedocs.io/en/latest/). The data for model training is included in the project.     
