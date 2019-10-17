@@ -3,7 +3,11 @@
   
 # Web Service to host an ML Model for Prediction. 
 A simple python web service to host a machine learning model for prediction as a REST API.    
-    
+
+<p align="center">        
+  <img src="/docs/images/mpws-00.png" alt="RESTful Web Service">        
+</p>  
+
 The container trains a simple [text classifier](https://fasttext.cc/docs/en/supervised-tutorial.html) and hosts it for prediction as a web service written in [Sanic Framework](https://sanic.readthedocs.io/en/latest/). The data for model training is included in the project.     
     
 ---    
@@ -41,7 +45,9 @@ docker ps
 </p>        
     
     
->When we run the container two scripts are initiated: >1. `train.py` which trains the model to be hosted. >2. `prediction.py` which hosts the model as a web service.    
+>When we run the container two scripts are initiated: 
+>1. `train.py` which trains the model to be hosted. 
+>2. `prediction.py` which hosts the model as a web service.    
  ---    
  ### API Usage 
  The web services includes the [sanic-openapi](https://github.com/huge-success/sanic-openapi) integration. Thus, we can directly use the swagger portal from web browser to use the API. To open the swagger portal go to your browser and enter `http://localhost:8080/swagger/`. This will open the swagger portal only if the service is hosted properly.    
