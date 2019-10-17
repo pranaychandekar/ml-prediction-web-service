@@ -3,9 +3,9 @@ import json
 import pytest
 from sanic.websocket import WebSocketProtocol
 
-import inference
+import prediction
 
-my_app = inference.app
+my_app = prediction.app
 
 
 @pytest.yield_fixture
@@ -31,7 +31,7 @@ async def test_checkpost(test_cli):
             "source": "testCase",
             "text": "Why not put knives in the dishwasher?"
         }
-    resp = await test_cli.post("v1/infer", data=json.dumps(req_input))
+    resp = await test_cli.post("v1/predict", data=json.dumps(req_input))
     print(resp)
     print(resp.status)
     assert resp.status == 200

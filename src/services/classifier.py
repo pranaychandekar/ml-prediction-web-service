@@ -11,7 +11,7 @@ class Classifier:
     """
     This class is a singleton which returns the instance of the Classifier.
 
-    :Authors: pranaychandekar
+    :Author: Pranay Chandekar
     """
 
     __instance = None

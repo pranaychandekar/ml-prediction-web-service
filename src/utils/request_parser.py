@@ -5,15 +5,15 @@ LOGGER = Logger.get_instance()
 
 class RequestParser:
     """
-    The objective of this class is to parse the request received by the ml-inference-api web service.
+    The objective of this class is to parse the request received by the ml-prediction-web-service.
 
-    :Authors: pranaychandekar
+    :Author: Pranay Chandekar
     """
 
     @staticmethod
     def request_parser(request: dict):
         """
-        This method parses the request received by the ml-inference-api web service.
+        This method parses the request received by the ml-prediction-web-service.
 
         :param request: The received request.
         :type request: dict

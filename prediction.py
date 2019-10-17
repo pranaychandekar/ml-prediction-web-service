@@ -21,7 +21,7 @@ CONFIGS = Configs.get_instance(app)
 
 from src.utils.logging_util import Logger
 from src.utils.request_parser import RequestParser
-from src.services.inference_service import InferenceService
+from src.services.prediction_service import PredictionService
 
 LOGGER = Logger.get_instance()
 
@@ -30,7 +30,7 @@ LOGGER = Logger.get_instance()
 @doc.summary("Hit this end-point to check if service is up and running.")
 async def index(request):
     """
-    Use this end-point to check if the ml-inference-api web service is up and running.
+    Use this end-point to check if the ml-prediction-web-service is up and running.
 
     :return: The success message if the service is up.
     """
@@ -38,7 +38,7 @@ async def index(request):
     return response.json(
         {
             "status": 200,
-            "service": "ml-inference-api",
+            "service": "ml-prediction-web-service",
             "version": "1.0",
             "author": "Pranay Chandekar",
             "linkedIn": "https://www.linkedin.com/in/pranaychandekar/",
@@ -47,9 +47,9 @@ async def index(request):
     )
 
 
-@app.route("v1/infer", methods=["POST"])
+@app.route("v1/predict", methods=["POST"])
 @doc.summary(
-    "Hit this end-point with a post request to infer the label for the text in the request."
+    "Hit this end-point with a post request to predict the label for the text in the request."
 )
 @doc.consumes(
     doc.JsonBody({"source": str, "text": str}),
@@ -58,15 +58,15 @@ async def index(request):
 )
 async def get_response(request):
     """
-    This end point infers the label for the given text and returns the result in the response.
+    This end point predicts the label for the given text and returns the result in the response.
 
     :param request: The request for the API.
-    :return: The response with the results.
+    :return: The response with the prediction results.
     """
     tic = time.time()
 
     # Step 01: Set the default response.
-    inference_service_response = response.json(
+    prediction_service_response = response.json(
         {
             "status": 400,
             "message": "Bad Request! Please ensure that the 'text' key is not empty.",
@@ -80,24 +80,24 @@ async def get_response(request):
         LOGGER.logger.info(
             "Received request from source: "
             + parsed_request["source"]
-            + " to infer the label for text: "
+            + " to predict the label for text: "
             + parsed_request["text"]
         )
 
-        # Step 03: If the request is valid then trigger the classifier to infer the labels.
+        # Step 03: If the request is valid then trigger the classifier to predict the label.
         if parsed_request["text"] != "":
-            inference_service_response = response.json(
-                InferenceService.get_response(parsed_request["text"])
+            prediction_service_response = response.json(
+                PredictionService.get_response(parsed_request["text"])
             )
 
     except Exception as e:
-        error = "Failed to infer label for " + request.json() + " with error: " + str(e)
+        error = "Failed to predict label for " + request.json() + " with error: " + str(e)
         LOGGER.logger.exception(error)
         LOGGER.log_err.exception(error)
-        inference_service_response = response.json(
+        prediction_service_response = response.json(
             {
                 "status": 500,
-                "message": "Error while inferring the label. Please check the web service logs for more details.",
+                "message": "Error while predicting the label. Please check the web service logs for more details.",
             }
         )
 
@@ -108,11 +108,11 @@ async def get_response(request):
     )
 
     # Step 04: Return the response.
-    return inference_service_response
+    return prediction_service_response
 
 
 if __name__ == "__main__":
-    LOGGER.logger.info("\nStarting the ml-inference-api web service.\n")
+    LOGGER.logger.info("\nStarting the ml-prediction-web-service.\n")
     app.run(
         host=CONFIGS.get_configuration("SOCKET_HOST"),
         port=CONFIGS.get_configuration("PORT"),
