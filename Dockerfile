@@ -2,12 +2,12 @@ FROM python:3.6-buster
 
 MAINTAINER Pranay Chandekar "pranayc6@gmail.com"
 
-LABEL project="ml-inference-api"
+LABEL project="ml-prediction-web-service"
 
 EXPOSE 8080
 
 ARG APP_HOME=/opt/deployment
-ARG PROJECT_NAME="ml-inference-api"
+ARG PROJECT_NAME="ml-prediction-web-service"
 
 ENV APP_HOME=${APP_HOME} \
     PROJECT_NAME=${PROJECT_NAME} \
@@ -29,7 +29,7 @@ RUN pip3 install -r requirements.txt && \
 
 COPY train.py ${PROJECT_HOME}/
 
-COPY inference.py ${PROJECT_HOME}/
+COPY prediction.py ${PROJECT_HOME}/
 
 COPY src ${PROJECT_HOME}/src
 

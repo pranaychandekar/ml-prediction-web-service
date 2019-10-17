@@ -10,7 +10,7 @@ class Logger:
     """
     This is a utility to write the web service logs.
 
-    :Authors: pranaychandekar
+    :Author: Pranay Chandekar
     """
 
     __instance = None

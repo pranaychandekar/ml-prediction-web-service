@@ -5,15 +5,15 @@ import fasttext
 
 class ClassifierTraining:
     """
-    This class contains the code to train the model to be hosted in ml-inference-api web service.
+    This class contains the code to train the model to be hosted in ml-prediction-web-service.
 
-    :Authors: pranaychandekar
+    :Author: Pranay Chandekar
     """
 
     @staticmethod
     def train_classifier():
         """
-        This method loads the data, trains the model and saves the model in path "resources/model" for ml-inference-api web service.
+        This method loads the data, trains the model and saves the model in path "resources/model" for ml-prediction-web-service.
         """
         # Step 01: Set the data paths
         resources_path = "resources"
