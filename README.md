@@ -9,6 +9,9 @@ A simple python web service to host a machine learning model for prediction as a
 </p>  
 
 The container trains a simple [text classifier](https://fasttext.cc/docs/en/supervised-tutorial.html) and hosts it for prediction as a web service written in [Sanic Framework](https://sanic.readthedocs.io/en/latest/). The data for model training is included in the project.     
+
+
+*For more details on customizing this project or using this as a template please follow [this article](https://medium.com/analytics-vidhya/ml-prediction-as-a-restful-web-service-9fa33d01566f).*
     
 ---    
  ### Pre-requisites    
