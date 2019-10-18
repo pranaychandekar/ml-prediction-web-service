@@ -83,7 +83,7 @@ To predict the label of the text:
   <img src="/docs/images/mpws-07.png" alt="Try It Out">        
 </p>       
     
- 3. In Edit Value, paste the folllowing json    
+ 3. In `Edit Value`, paste the following json    
 ```json
 {    
 	"source": "swagger",    
