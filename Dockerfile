@@ -27,10 +27,6 @@ RUN pip3 install -r requirements.txt && \
     mkdir -p ${PROJECT_HOME}/resources && \
     chmod a+x ${APP_HOME}/start-server.sh
 
-COPY train.py ${PROJECT_HOME}/
-
-COPY prediction.py ${PROJECT_HOME}/
-
 COPY src ${PROJECT_HOME}/src
 
 COPY conf ${PROJECT_HOME}/conf

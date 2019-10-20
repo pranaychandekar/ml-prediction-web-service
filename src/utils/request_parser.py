@@ -1,4 +1,4 @@
-from src.utils.logging_util import Logger
+from utils.logging_util import Logger
 
 LOGGER = Logger.get_instance()
 

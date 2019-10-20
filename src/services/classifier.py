@@ -1,7 +1,7 @@
 import fasttext as ft
 
-from src.configurations.configs import Configs
-from src.utils.logging_util import Logger
+from configurations.configs import Configs
+from utils.logging_util import Logger
 
 CONFIGS = Configs.get_instance()
 LOGGER = Logger.get_instance()

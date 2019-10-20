@@ -5,7 +5,7 @@ from sanic import response
 from sanic_openapi import doc
 from sanic_openapi import swagger_blueprint
 
-from src.configurations.configs import Configs
+from configurations.configs import Configs
 
 import time
 
@@ -19,9 +19,9 @@ app.config.from_pyfile(config_file_path)
 
 CONFIGS = Configs.get_instance(app)
 
-from src.utils.logging_util import Logger
-from src.utils.request_parser import RequestParser
-from src.services.prediction_service import PredictionService
+from utils.logging_util import Logger
+from utils.request_parser import RequestParser
+from services.prediction_service import PredictionService
 
 LOGGER = Logger.get_instance()
 
