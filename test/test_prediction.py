@@ -3,7 +3,7 @@ import json
 import pytest
 from sanic.websocket import WebSocketProtocol
 
-import prediction
+from src import prediction
 
 my_app = prediction.app
 

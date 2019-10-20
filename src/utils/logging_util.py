@@ -1,7 +1,7 @@
 import logging
 import logging.config
 
-from src.configurations.configs import Configs
+from configurations.configs import Configs
 
 CONFIGS = Configs.get_instance()
 
