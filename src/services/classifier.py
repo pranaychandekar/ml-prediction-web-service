@@ -1,9 +1,9 @@
 import fasttext as ft
 
-from configurations.configs import Configs
+from configurations.app_configs import AppConfigs
 from utils.logging_util import Logger
 
-CONFIGS = Configs.get_instance()
+APP_CONFIGS = AppConfigs.get_instance()
 LOGGER = Logger.get_instance()
 
 
@@ -31,7 +31,7 @@ class Classifier:
         This method loads the Classifier model in the instance variable 'model'.
         """
         # Step 01: Load the model path from the configurations.
-        model_path = CONFIGS.get_configuration("MODEL_PATH")
+        model_path = APP_CONFIGS.get_configuration("MODEL_PATH")
 
         # Step 02: Load the model.
         try:

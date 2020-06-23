@@ -1,0 +1,7 @@
+{
+  "SOCKET_HOST": "0.0.0.0",
+  "PORT": 8080,
+  "RESOURCES_DIRECTORY": "resources/",
+  "MODEL_PATH": "resources/model/model.bin"
+}
+

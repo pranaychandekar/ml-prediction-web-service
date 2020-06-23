@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "loggers": {
+    "root": {
+      "level": "INFO",
+      "handlers": [
+        "console"
+      ]
+    },
+    "errLogger": {
+      "level": "ERROR",
+      "handlers": [
+        "fileHandlerError"
+      ],
+      "qualname": "errLogger",
+      "propagate": false
+    },
+    "fileLogger": {
+      "level": "INFO",
+      "handlers": [
+        "fileHandler"
+      ],
+      "qualname": "fileLogger",
+      "propagate": false
+    }
+  },
+  "handlers": {
+    "fileHandler": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "formatter": "simpleFormatter",
+      "level": "INFO",
+      "filename": "logs/ml-prediction-web-service.log",
+      "when": "midnight"
+    },
+    "fileHandlerError": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "formatter": "simpleFormatter",
+      "level": "ERROR",
+      "filename": "logs/ml-prediction-web-service.err",
+      "when": "midnight"
+    },
+    "console": {
+      "class": "logging.StreamHandler",
+      "formatter": "simpleFormatter",
+      "level": "DEBUG",
+      "stream": "ext://sys.stdout"
+    }
+  },
+  "formatters": {
+    "simpleFormatter": {
+      "format": "%(asctime)s.%(msecs)03d [%(threadName)s|%(thread)d] [%(levelname)s] [%(module)s|%(lineno)s] - %(message)s",
+      "datefmt": "%Y-%m-%d %H:%M:%S"
+    }
+  }
+}

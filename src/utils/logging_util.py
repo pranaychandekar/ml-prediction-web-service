@@ -1,9 +1,8 @@
+import json
 import logging
 import logging.config
 
-from configurations.configs import Configs
-
-CONFIGS = Configs.get_instance()
+from utils import LOGGING_CONFIGS_PATH
 
 
 class Logger:
@@ -19,9 +18,10 @@ class Logger:
         """
         This method initialized the Logger utility.
         """
-        path = CONFIGS.get_configuration("LOG_CONFIG_PATH")
+        with open(LOGGING_CONFIGS_PATH) as f:
+            configs_dict = json.load(f)
 
-        logging.config.fileConfig(path)
+        logging.config.dictConfig(configs_dict)
 
         self.logger = logging.getLogger("fileLogger")
         self.log_err = logging.getLogger("errLogger")

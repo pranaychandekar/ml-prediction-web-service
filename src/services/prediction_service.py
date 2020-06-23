@@ -1,8 +1,8 @@
 from services.classifier import Classifier
-from configurations.configs import Configs
+from configurations.app_configs import AppConfigs
 from utils.logging_util import Logger
 
-CONFIGS = Configs.get_instance()
+APP_CONFIGS = AppConfigs.get_instance()
 LOGGER = Logger.get_instance()
 
 

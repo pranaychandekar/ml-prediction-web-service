@@ -2,10 +2,14 @@ import os
 import time
 import fasttext
 
+from utils.logging_util import Logger
+
+LOGGER = Logger.get_instance()
+
 
 class ClassifierTraining:
     """
-    This class contains the code to train the model to be hosted in ml-prediction-web-service.
+    This class contains the code to train the model to be hosted in web service.
 
     :Author: Pranay Chandekar
     """
@@ -13,7 +17,7 @@ class ClassifierTraining:
     @staticmethod
     def train_classifier():
         """
-        This method loads the data, trains the model and saves the model in path "resources/model" for ml-prediction-web-service.
+        This method loads the data, trains the model and saves the model in path "resources/model" for web service.
         """
         # Step 01: Set the data paths
         resources_path = "resources"
@@ -34,7 +38,9 @@ class ClassifierTraining:
         )
 
         # Step 03: Evaluate the model on validation data.
-        print("\nValidation Metrics:", model.test(test_file_path))
+        LOGGER.logger.info(
+            "Validation Metrics: " + str(model.test(test_file_path)) + "\n"
+        )
 
         # Step 04: Save the model.
         model_directory = os.path.join(resources_path, "model")
@@ -49,4 +55,6 @@ if __name__ == "__main__":
 
     toc = time.time()
 
-    print("\nTotal time taken to train the classifier:", toc - tic, "seconds.")
+    LOGGER.logger.info(
+        "Total time taken to train the classifier: " + str(toc - tic) + " seconds.\n"
+    )
