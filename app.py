@@ -31,7 +31,7 @@ tags_metadata = [
 app = FastAPI(
     title="Web Service Template",
     description="This project is a production ready ML Web Service template.",
-    version="1.0.0",
+    version="2.0.0",
     openapi_tags=tags_metadata,
     docs_url="/documentation",
 )
