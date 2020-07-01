@@ -29,11 +29,13 @@ tags_metadata = [
 ]
 
 app = FastAPI(
-    title="Web Service Template",
-    description="This project is a production ready ML Web Service template.",
+    title="ML Prediction Web Service",
+    description="This project is a production ready ML Prediction Web Service template. "
+                "<br /><br />"
+                "Author - [***Pranay Chandekar***](https://www.linkedin.com/in/pranaychandekar/)",
     version="2.0.0",
     openapi_tags=tags_metadata,
-    docs_url="/documentation",
+    docs_url="/swagger/",
 )
 LOGGER = Logger.get_instance()
 APP_CONFIGS = AppConfigs.get_instance()
