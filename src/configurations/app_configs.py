@@ -1,5 +1,8 @@
+"""
+Application Configurations
+"""
 import json
-from configurations import APP_CONFIGS_PATH
+from src.domain.constants import APP_CONFIGS_PATH
 
 
 class AppConfigs:
@@ -15,8 +18,8 @@ class AppConfigs:
         """
         This method initializes the instance of the web service configurations.
         """
-        with open(APP_CONFIGS_PATH) as f:
-            self.configurations: dict = json.load(f)
+        with open(APP_CONFIGS_PATH) as configs_file:
+            self.configurations: dict = json.load(configs_file)
 
         AppConfigs.__instance = self
 

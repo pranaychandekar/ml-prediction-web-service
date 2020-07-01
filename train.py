@@ -1,8 +1,11 @@
+"""
+Model Trainer
+"""
 import os
 import time
 import fasttext
 
-from utils.logging_util import Logger
+from src.utils.logging_util import Logger
 
 LOGGER = Logger.get_instance()
 
@@ -15,16 +18,31 @@ class ClassifierTraining:
     """
 
     @staticmethod
+    def get_paths(resources_path: str):
+        """
+        This method returns the train file path and test file path.
+
+        :param resources_path: The path to resources folder.
+        :return: Train file path and test file path
+        """
+        data_path = os.path.join(resources_path, "data")
+        train_file_path = os.path.join(data_path, "cooking.train")
+        test_file_path = os.path.join(data_path, "cooking.valid")
+
+        return train_file_path, test_file_path
+
+    @staticmethod
     def train_classifier():
         """
-        This method loads the data, trains the model and saves the model in path "resources/model" for web service.
+        This method
+        1. loads the data,
+        2. trains the model and
+        3. saves the model in path "resources/model" for web service.
         """
         # Step 01: Set the data paths
         resources_path = "resources"
 
-        data_path = os.path.join(resources_path, "data")
-        train_file_path = os.path.join(data_path, "cooking.train")
-        test_file_path = os.path.join(data_path, "cooking.valid")
+        train_file_path, test_file_path = ClassifierTraining.get_paths(resources_path)
 
         # Step 02: Train the model.
         model = fasttext.train_supervised(
@@ -38,9 +56,7 @@ class ClassifierTraining:
         )
 
         # Step 03: Evaluate the model on validation data.
-        LOGGER.logger.info(
-            "Validation Metrics: " + str(model.test(test_file_path)) + "\n"
-        )
+        LOGGER.logger.info("Validation Metrics: %s \n", model.test(test_file_path))
 
         # Step 04: Save the model.
         model_directory = os.path.join(resources_path, "model")
@@ -56,5 +72,5 @@ if __name__ == "__main__":
     toc = time.time()
 
     LOGGER.logger.info(
-        "Total time taken to train the classifier: " + str(toc - tic) + " seconds.\n"
+        "Total time taken to train the classifier: %s seconds", toc - tic
     )
