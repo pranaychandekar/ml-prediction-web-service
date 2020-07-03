@@ -31,8 +31,8 @@ tags_metadata = [
 app = FastAPI(
     title="ML Prediction Web Service",
     description="This project is a production ready ML Prediction Web Service template. "
-                "<br /><br />"
-                "Author - [***Pranay Chandekar***](https://www.linkedin.com/in/pranaychandekar/)",
+    "<br /><br />"
+    "Author - [***Pranay Chandekar***](https://www.linkedin.com/in/pranaychandekar/)",
     version="2.0.0",
     openapi_tags=tags_metadata,
     docs_url="/swagger/",
