@@ -5,6 +5,9 @@ from pydantic import BaseModel, Field
 
 
 class BuildResponse(BaseModel):
+    """
+    Build Response Schema
+    """
     service: str = Field(..., example="ml-prediction-web-service")
     version: str = Field(..., example="2.0.0")
     author: str = Field(..., example="Pranay Chandekar")
