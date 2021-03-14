@@ -16,22 +16,22 @@ ENV APP_HOME=${APP_HOME} \
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
 
-COPY *-server.sh ${APP_HOME}/
-
 ADD requirements.txt /
 
 RUN pip3 install -r requirements.txt && \
     mkdir -p ${PROJECT_HOME}/src && \
     mkdir -p ${PROJECT_HOME}/logs && \
     mkdir -p ${PROJECT_HOME}/conf && \
-    mkdir -p ${PROJECT_HOME}/resources && \
-    chmod a+x ${APP_HOME}/start-server.sh
+    mkdir -p ${PROJECT_HOME}/resources
 
 COPY src ${PROJECT_HOME}/src
-
+COPY app.py ${PROJECT_HOME}/
+COPY train.py ${PROJECT_HOME}/
 COPY conf ${PROJECT_HOME}/conf
-
 COPY resources ${PROJECT_HOME}/resources
+COPY *-server.sh ${APP_HOME}/
+
+RUN chmod a+x ${APP_HOME}/start-server.sh
 
 WORKDIR ${PROJECT_HOME}
 ENTRYPOINT ["/opt/deployment/start-server.sh"]

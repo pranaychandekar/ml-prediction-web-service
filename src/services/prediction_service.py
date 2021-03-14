@@ -1,8 +1,11 @@
-from services.classifier import Classifier
-from configurations.configs import Configs
-from utils.logging_util import Logger
+"""
+Prediction Service
+"""
+from src.services.classifier import Classifier
+from src.configurations.app_configs import AppConfigs
+from src.utils.logging_util import Logger
 
-CONFIGS = Configs.get_instance()
+APP_CONFIGS = AppConfigs.get_instance()
 LOGGER = Logger.get_instance()
 
 
@@ -27,21 +30,30 @@ class PredictionService:
         """
         # Step 01: Initialize the response.
         response = dict()
-        results = dict()
 
-        # Step 02: Predict the label/class of the received text.
+        # Step 02: Prepare the response.
+        response["label"], response["confidence"] = PredictionService.predict_label(
+            text
+        )
+
+        # Step 03: Return the response.
+        return response
+
+    @staticmethod
+    def predict_label(text: str):
+        """
+        This method uses the classification model to predict the label.
+
+        :param text: The text to be classified.
+        :return: the predicted label and the confidence
+        """
+        # Step 01: Predict the label
         prediction_result = PredictionService.__model.predict(text)
 
-        # Step 03: Parse the prediction result.
+        # Step 02: Parse the prediction result.
         predicted_label = str(prediction_result[0][0])
         predicted_label = predicted_label.replace("__label__", "").strip()
         confidence = round(100 * prediction_result[1][0], 2)
 
-        # Step 04: Prepare the response.
-        results["label"] = predicted_label
-        results["confidence"] = confidence
-        response["status"] = 200
-        response["results"] = results
-
-        # Step 05: Return the response.
-        return response
+        # Step 03: Return the result.
+        return predicted_label, confidence
