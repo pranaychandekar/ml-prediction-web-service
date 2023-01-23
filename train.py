@@ -7,8 +7,6 @@ import fasttext
 
 from src.utils.logging_util import Logger
 
-LOGGER = Logger.get_instance()
-
 
 class ClassifierTraining:
     """
@@ -56,7 +54,7 @@ class ClassifierTraining:
         )
 
         # Step 03: Evaluate the model on validation data.
-        LOGGER.logger.info("Validation Metrics: %s \n", model.test(test_file_path))
+        Logger.get_instance().info("Validation Metrics: %s \n", model.test(test_file_path))
 
         # Step 04: Save the model.
         model_directory = os.path.join(resources_path, "model")
@@ -71,6 +69,6 @@ if __name__ == "__main__":
 
     toc = time.time()
 
-    LOGGER.logger.info(
+    Logger.get_instance().info(
         "Total time taken to train the classifier: %s seconds", toc - tic
     )

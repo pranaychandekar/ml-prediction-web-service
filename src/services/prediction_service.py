@@ -2,11 +2,6 @@
 Prediction Service
 """
 from src.services.classifier import Classifier
-from src.configurations.app_configs import AppConfigs
-from src.utils.logging_util import Logger
-
-APP_CONFIGS = AppConfigs.get_instance()
-LOGGER = Logger.get_instance()
 
 
 class PredictionService:

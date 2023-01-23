@@ -5,7 +5,6 @@ import time
 
 from fastapi.routing import APIRouter
 from src.utils.logging_util import Logger
-from src.configurations.app_configs import AppConfigs
 from src.domain.request_response_schemas import (
     PredictionServiceRequest,
     PredictionServiceResponse,
@@ -13,9 +12,6 @@ from src.domain.request_response_schemas import (
 from src.services.prediction_service import PredictionService
 
 router = APIRouter()
-
-LOGGER = Logger.get_instance()
-APP_CONFIGS = AppConfigs.get_instance()
 
 
 @router.post(
@@ -30,9 +26,9 @@ async def get_response(request: PredictionServiceRequest):
     :return: The response with the prediction results.
     """
     tic = time.time()
-    LOGGER.logger.info("Request: %s", request.json())
+    Logger.get_instance().info("Request: %s", request.json())
     prediction_service_response = PredictionService.get_response(request.text)
-    LOGGER.logger.info(
+    Logger.get_instance().info(
         "Total time taken to respond: %s ms.\n", round(1000 * (time.time() - tic), 2)
     )
     return prediction_service_response

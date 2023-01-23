@@ -23,10 +23,7 @@ class Logger:
         """
         logging.config.dictConfig(Logger.get_log_configs_dict())
 
-        self.logger = logging.getLogger("fileLogger")
-        self.log_err = logging.getLogger("errLogger")
-
-        Logger.__instance = self
+        Logger.__instance = logging.getLogger("fileLogger")
 
     @staticmethod
     def get_log_configs_dict():
