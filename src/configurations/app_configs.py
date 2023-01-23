@@ -21,16 +21,7 @@ class AppConfigs:
         with open(APP_CONFIGS_PATH) as configs_file:
             self.configurations: dict = json.load(configs_file)
 
-        AppConfigs.__instance = self
-
-    def get_configuration(self, configuration: str):
-        """
-        This method returns the requested configuration value.
-
-        :param configuration: The name of the configuration.
-        :return: The configuration value.
-        """
-        return self.configurations.get(configuration)
+        AppConfigs.__instance = self.configurations
 
     @staticmethod
     def get_instance():

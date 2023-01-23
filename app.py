@@ -33,9 +33,6 @@ app = FastAPI(
     docs_url="/swagger/",
 )
 
-LOGGER = Logger.get_instance()
-APP_CONFIGS = AppConfigs.get_instance()
-
 
 @app.get("/", tags=["Build"], response_model=BuildResponse)
 async def build():
@@ -44,7 +41,7 @@ async def build():
 
     :return: The build details
     """
-    LOGGER.logger.info("Checking the service setup.\n")
+    Logger.get_instance().info("Checking the service setup.\n")
     return {
         "service": "ml-prediction-web-service",
         "version": "2.0",
@@ -56,9 +53,9 @@ async def build():
 app.include_router(v1.router, prefix="/v1")
 
 if __name__ == "__main__":
-    LOGGER.logger.info("Starting the web service.")
+    Logger.get_instance().info("Starting the web service.")
     uvicorn.run(
         app,
-        host=APP_CONFIGS.get_configuration(SOCKET_HOST),
-        port=APP_CONFIGS.get_configuration(PORT),
+        host=AppConfigs.get_instance().get(SOCKET_HOST),
+        port=AppConfigs.get_instance().get(PORT),
     )
