@@ -19,7 +19,8 @@ class TestV1(unittest.TestCase):
 
     @patch("src.routers.v1.Logger")
     @patch("src.routers.v1.PredictionService")
-    def test_get_response(self, mock_prediction_service, mock_logger):
+    @patch("src.services.classifier.fasttext")
+    def test_get_response(self, mock_fasttext, mock_prediction_service, mock_logger):
         prediction_service_request_json = {
             "source": "pytest",
             "text": "Don't let the knives sink :P"
