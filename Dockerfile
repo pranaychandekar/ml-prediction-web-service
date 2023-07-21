@@ -1,4 +1,4 @@
-FROM python:3.9-buster
+FROM python:3.11-buster
 
 MAINTAINER Pranay Chandekar "pranayc6@gmail.com"
 
