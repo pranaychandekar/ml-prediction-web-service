@@ -22,7 +22,7 @@ class Classifier:
         This method initializes the instance of the Classifier.
         """
         if Classifier.__instance is not None:
-            Logger.get_instance().exception("This class is a singleton!")
+            Logger().get_instance().exception("This class is a singleton!")
         else:
             self.model = False
             self.load_model()
@@ -40,7 +40,7 @@ class Classifier:
         # Step 03: Assign this instance to '__instance'.
         Classifier.__instance = self
 
-        Logger.get_instance().info(
+        Logger().get_instance().info(
             "Finished loading the classifier model: %s", self.get_model()
         )
 

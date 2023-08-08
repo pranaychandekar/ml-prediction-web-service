@@ -41,7 +41,7 @@ async def build():
 
     :return: The build details
     """
-    Logger.get_instance().info("Checking the service setup.\n")
+    Logger().get_instance().info("Checking the service setup.\n")
     return {
         "service": "ml-prediction-web-service",
         "version": "2.0",
@@ -53,7 +53,7 @@ async def build():
 app.include_router(v1.router, prefix="/v1")
 
 if __name__ == "__main__":
-    Logger.get_instance().info("Starting the web service.")
+    Logger().get_instance().info("Starting the web service.")
     uvicorn.run(
         app,
         host=AppConfigs.get_instance().get(SOCKET_HOST),

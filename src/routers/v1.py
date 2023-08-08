@@ -26,9 +26,9 @@ async def get_response(request: PredictionServiceRequest):
     :return: The response with the prediction results.
     """
     tic = time.time()
-    Logger.get_instance().info("Request: %s", request.json())
+    Logger().get_instance().info("Request: %s", request.json())
     prediction_service_response = PredictionService.get_response(request.text)
-    Logger.get_instance().info(
+    Logger().get_instance().info(
         "Total time taken to respond: %s ms.\n", round(1000 * (time.time() - tic), 2)
     )
     return prediction_service_response

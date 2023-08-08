@@ -6,16 +6,15 @@ import logging
 import logging.config
 
 from src.domain.constants import LOGGING_CONFIGS_PATH
+from src.utils.singleton import Singleton
 
 
-class Logger:
+class Logger(metaclass=Singleton):
     """
     This is a utility to write the web service logs.
 
     :Author: Pranay Chandekar
     """
-
-    __instance = None
 
     def __init__(self):
         """
@@ -23,7 +22,7 @@ class Logger:
         """
         logging.config.dictConfig(Logger.get_log_configs_dict())
 
-        Logger.__instance = logging.getLogger("fileLogger")
+        self.instance = logging.getLogger("fileLogger")
 
     @staticmethod
     def get_log_configs_dict():
@@ -37,13 +36,10 @@ class Logger:
             configs_dict = json.load(config_file)
         return configs_dict
 
-    @staticmethod
-    def get_instance():
+    def get_instance(self):
         """
         This method returns an instance of the Logger utility.
 
         :return: The Logger utility instance.
         """
-        if Logger.__instance is None:
-            Logger()
-        return Logger.__instance
+        return self.instance
