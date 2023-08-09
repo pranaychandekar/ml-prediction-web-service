@@ -56,6 +56,6 @@ if __name__ == "__main__":
     Logger().get_instance().info("Starting the web service.")
     uvicorn.run(
         app,
-        host=AppConfigs.get_instance().get(SOCKET_HOST),
-        port=AppConfigs.get_instance().get(PORT),
+        host=AppConfigs().get_instance().get(SOCKET_HOST),
+        port=AppConfigs().get_instance().get(PORT),
     )

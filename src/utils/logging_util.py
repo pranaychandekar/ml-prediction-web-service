@@ -20,26 +20,17 @@ class Logger(metaclass=Singleton):
         """
         This method initialized the Logger utility.
         """
-        logging.config.dictConfig(Logger.get_log_configs_dict())
-
-        self.instance = logging.getLogger("fileLogger")
-
-    @staticmethod
-    def get_log_configs_dict():
-        """
-        This method reads the logging configs from a json file
-        and returns it as a dictionary.
-
-        :return: configs dictionary
-        """
         with open(LOGGING_CONFIGS_PATH) as config_file:
             configs_dict = json.load(config_file)
-        return configs_dict
+
+        logging.config.dictConfig(configs_dict)
+
+        self._instance = logging.getLogger("fileLogger")
 
     def get_instance(self):
         """
-        This method returns an instance of the Logger utility.
+        This method returns the AppConfigs instance
 
-        :return: The Logger utility instance.
+        :return: Logger instance
         """
-        return self.instance
+        return self._instance
