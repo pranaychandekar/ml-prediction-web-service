@@ -22,7 +22,7 @@ class PredictionService:
         :rtype: dict
         """
         # Step 01: Initialize the response.
-        response = dict()
+        response = {}
 
         # Step 02: Prepare the response.
         response["label"], response["confidence"] = PredictionService.predict_label(

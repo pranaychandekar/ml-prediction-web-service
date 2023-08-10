@@ -15,6 +15,7 @@ class Classifier(metaclass=Singleton):
 
     :Author: Pranay Chandekar
     """
+
     def __init__(self):
         """
         This method initializes the instance of the Classifier.

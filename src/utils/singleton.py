@@ -7,6 +7,7 @@ class Singleton(type):
     """
     Singleton Base Implementation
     """
+
     _instances = {}
 
     def __call__(cls, *args, **kwargs):

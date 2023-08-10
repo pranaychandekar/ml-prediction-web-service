@@ -23,7 +23,7 @@ class Logger(metaclass=Singleton):
         """
         This method initialized the Logger utility.
         """
-        with open(LOGGING_CONFIGS_PATH) as config_file:
+        with open(LOGGING_CONFIGS_PATH, encoding="utf-8") as config_file:
             configs_dict = json.load(config_file)
 
         logging.config.dictConfig(configs_dict)
@@ -40,13 +40,19 @@ class Logger(metaclass=Singleton):
 
 
 def log_execution_time(func):
+    """
+    This function computes and logs the execution time of the wrapped function
+    """
+
     @wraps(func)
     async def _calculate_time(*args, **kwargs):
         tic = time.time()
         response = await func(*args, **kwargs)
         toc = time.time()
 
-        Logger().get_instance().info(f"Func: {func.__name__} executed in {round(1000 * (toc - tic), 2)} ms.\n")
+        Logger().get_instance().info(
+            f"Func: {func.__name__} executed in {round(1000 * (toc - tic), 2)} ms.\n"
+        )
 
         return response
 

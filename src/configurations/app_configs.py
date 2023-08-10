@@ -18,7 +18,7 @@ class AppConfigs(metaclass=Singleton):
         """
         This method initializes the instance of the web service configurations.
         """
-        with open(APP_CONFIGS_PATH) as configs_file:
+        with open(APP_CONFIGS_PATH, encoding="utf-8") as configs_file:
             self._configurations: dict = json.load(configs_file)
 
     def get_instance(self):
