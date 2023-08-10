@@ -2,48 +2,58 @@
 Logging Util
 """
 import json
+import time
 import logging
 import logging.config
 
+from functools import wraps
+
 from src.domain.constants import LOGGING_CONFIGS_PATH
+from src.utils.singleton import Singleton
 
 
-class Logger:
+class Logger(metaclass=Singleton):
     """
     This is a utility to write the web service logs.
 
     :Author: Pranay Chandekar
     """
 
-    __instance = None
-
     def __init__(self):
         """
         This method initialized the Logger utility.
         """
-        logging.config.dictConfig(Logger.get_log_configs_dict())
-
-        Logger.__instance = logging.getLogger("fileLogger")
-
-    @staticmethod
-    def get_log_configs_dict():
-        """
-        This method reads the logging configs from a json file
-        and returns it as a dictionary.
-
-        :return: configs dictionary
-        """
-        with open(LOGGING_CONFIGS_PATH) as config_file:
+        with open(LOGGING_CONFIGS_PATH, encoding="utf-8") as config_file:
             configs_dict = json.load(config_file)
-        return configs_dict
 
-    @staticmethod
-    def get_instance():
-        """
-        This method returns an instance of the Logger utility.
+        logging.config.dictConfig(configs_dict)
 
-        :return: The Logger utility instance.
+        self._instance = logging.getLogger("fileLogger")
+
+    def get_instance(self):
         """
-        if Logger.__instance is None:
-            Logger()
-        return Logger.__instance
+        This method returns the AppConfigs instance
+
+        :return: Logger instance
+        """
+        return self._instance
+
+
+def log_execution_time(func):
+    """
+    This function computes and logs the execution time of the wrapped function
+    """
+
+    @wraps(func)
+    async def _calculate_time(*args, **kwargs):
+        tic = time.time()
+        response = await func(*args, **kwargs)
+        toc = time.time()
+
+        Logger().get_instance().info(
+            f"Func: {func.__name__} executed in {round(1000 * (toc - tic), 2)} ms.\n"
+        )
+
+        return response
+
+    return _calculate_time

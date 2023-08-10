@@ -11,8 +11,6 @@ class PredictionService:
     :Author: Pranay Chandekar
     """
 
-    __model = Classifier.get_instance().get_model()
-
     @staticmethod
     def get_response(text: str):
         """
@@ -24,7 +22,7 @@ class PredictionService:
         :rtype: dict
         """
         # Step 01: Initialize the response.
-        response = dict()
+        response = {}
 
         # Step 02: Prepare the response.
         response["label"], response["confidence"] = PredictionService.predict_label(
@@ -43,7 +41,7 @@ class PredictionService:
         :return: the predicted label and the confidence
         """
         # Step 01: Predict the label
-        prediction_result = PredictionService.__model.predict(text)
+        prediction_result = Classifier().get_instance().predict(text)
 
         # Step 02: Parse the prediction result.
         predicted_label = str(prediction_result[0][0])

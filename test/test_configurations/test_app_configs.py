@@ -17,7 +17,7 @@ class TestAppConfigs(unittest.TestCase):
     def test_(self, mock_open, mock_json):
         mock_json.load.return_value = {"PORT": 8080}
 
-        configs = AppConfigs.get_instance()
+        configs = AppConfigs().get_instance()
 
         self.assertEqual(configs.get("PORT"), 8080)
 

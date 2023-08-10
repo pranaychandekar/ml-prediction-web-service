@@ -2,34 +2,29 @@
 Application Configurations
 """
 import json
+
 from src.domain.constants import APP_CONFIGS_PATH
+from src.utils.singleton import Singleton
 
 
-class AppConfigs:
+class AppConfigs(metaclass=Singleton):
     """
     The instance of this class holds the web service configurations.
 
     :Author: Pranay Chandekar
     """
 
-    __instance = None
-
     def __init__(self):
         """
         This method initializes the instance of the web service configurations.
         """
-        with open(APP_CONFIGS_PATH) as configs_file:
-            self.configurations: dict = json.load(configs_file)
+        with open(APP_CONFIGS_PATH, encoding="utf-8") as configs_file:
+            self._configurations: dict = json.load(configs_file)
 
-        AppConfigs.__instance = self.configurations
-
-    @staticmethod
-    def get_instance():
+    def get_instance(self):
         """
-        This method returns an instance of the web service configurations.
+        This method returns the AppConfigs instance
 
-        :return: The instance of the service configurations.
+        :return: AppConfigs instance
         """
-        if AppConfigs.__instance is None:
-            AppConfigs()
-        return AppConfigs.__instance
+        return self._configurations
