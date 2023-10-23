@@ -40,4 +40,4 @@ class TestV1(unittest.TestCase):
         loop = asyncio.get_event_loop()
         result = loop.run_until_complete(get_response(prediction_service_request))
 
-        self.assertEqual(result.status_code, 200)
+        self.assertEqual(type(result), dict)

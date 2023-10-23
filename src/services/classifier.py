@@ -1,7 +1,7 @@
 """
 Classifier Singleton
 """
-import fasttext as ft
+import fasttext
 
 from src.domain.constants import MODEL_PATH
 from src.configurations.app_configs import AppConfigs
@@ -24,7 +24,7 @@ class Classifier(metaclass=Singleton):
         model_path = AppConfigs().get_instance().get(MODEL_PATH)
 
         # Step 02: Load the model.
-        self._model = ft.load_model(model_path)
+        self._model = fasttext.load_model(model_path)
 
         Logger().get_instance().info(
             "Finished loading the classifier model: %s", self.get_instance()
