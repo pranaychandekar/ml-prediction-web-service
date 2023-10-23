@@ -1,0 +1,46 @@
+name: Pylint
+
+on:
+  push:
+    branches:
+      - master
+      # file paths to consider in the event
+    paths:
+      - 'conf/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'docs/**'
+      - '!**.md'
+      - '.github/workflows/**'
+  pull_request:
+    branches:
+      - master
+      # file paths to consider in the event
+    paths:
+      - 'conf/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'docs/**'
+      - '!**.md'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint
+    - name: Analysing the code with pylint
+      run: |
+        pylint --rcfile=pylint.conf --output-format=colorized $(git ls-files '*.py')

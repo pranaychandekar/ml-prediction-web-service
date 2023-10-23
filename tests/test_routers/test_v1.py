@@ -15,6 +15,9 @@ from src.routers.v1 import get_response
 
 
 class TestV1(unittest.TestCase):
+    """
+    This class tests all the code in the v1.py file
+    """
     logging.basicConfig(level=logging.FATAL)
 
     @patch("src.routers.v1.Logger")
