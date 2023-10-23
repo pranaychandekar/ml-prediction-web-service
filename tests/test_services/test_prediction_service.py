@@ -6,7 +6,7 @@ Author - Pranay Chandekar
 import logging
 
 import unittest
-from unittest.mock import patch, Mock, MagicMock
+from unittest.mock import patch, Mock
 
 from src.services.prediction_service import PredictionService
 
