@@ -1,6 +1,29 @@
 name: Pylint
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      # file paths to consider in the event
+    paths:
+      - 'conf/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'docs/**'
+      - '!**.md'
+      - '.github/workflows/**'
+  pull_request:
+    branches:
+      - master
+      # file paths to consider in the event
+    paths:
+      - 'conf/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'docs/**'
+      - '!**.md'
+      - '.github/workflows/**'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,4 +43,4 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        pylint --rcfile=pylint.conf --output-format=colorized $(git ls-files '*.py')

@@ -12,6 +12,9 @@ from src.services.prediction_service import PredictionService
 
 
 class TestPredictionService(unittest.TestCase):
+    """
+    This class tests all the code in the prediction_service.py file
+    """
     logging.basicConfig(level=logging.FATAL)
 
     @patch("src.services.prediction_service.Logger")

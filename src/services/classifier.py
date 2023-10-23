@@ -21,10 +21,10 @@ class Classifier(metaclass=Singleton):
         This method initializes the instance of the Classifier.
         """
         # Step 01: Load the model path from the configurations.
-        _model_path = AppConfigs().get_instance().get(MODEL_PATH)
+        model_path = AppConfigs().get_instance().get(MODEL_PATH)
 
         # Step 02: Load the model.
-        self._model = ft.load_model(_model_path)
+        self._model = ft.load_model(model_path)
 
         Logger().get_instance().info(
             "Finished loading the classifier model: %s", self.get_instance()
