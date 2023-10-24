@@ -44,7 +44,6 @@ jobs:
           shell: bash
           working-directory: tests
           run: |
-            sudo apt-get install python3-dev
             python -m pip install --upgrade pip
             pip install wheel
             pip3 install pybind11==2.10.3
