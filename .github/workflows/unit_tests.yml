@@ -57,7 +57,7 @@ jobs:
           run: |
             export IS_CI=true
             export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
-            python3 -m pytest --cov=src --cov-report xml:coverage.xml --cov-append ./tests/
+            python3 -m pytest
 
         - name: Print Coverage Report
           timeout-minutes: 2
