@@ -1,9 +1,11 @@
-name: Publish Docker image
+name: Publish Docker Image
 
 on:
   pull_request:
     types:
       - closed
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
