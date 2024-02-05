@@ -1,4 +1,4 @@
-fastapi==0.101.0
+fastapi==0.109.1
 uvicorn==0.23.2
 fasttext==0.9.2
 pytest==7.4.0
